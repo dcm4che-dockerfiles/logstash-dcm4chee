@@ -1,0 +1,80 @@
+input {
+  tcp {
+    port => 8000
+    codec => "json"
+    type => "wildfly"
+  }
+  udp {
+    port => 8514
+    type => "syslog"
+  }
+}
+
+filter {
+  if [type] == "syslog" {
+    grok {
+      match => { "message" => "<%{POSINT:syslog_pri}>1 %{TIMESTAMP_ISO8601:syslog_timestamp} %{SYSLOGHOST:syslog_hostname} %{DATA:syslog_program} %{POSINT:syslog_pid} %{DATA:syslog_msgid} - \xEF\xBB\xBF%{GREEDYDATA:message}" }
+      overwrite => [ "message" ]
+    }
+    xml {
+      source => "message"
+      target => "audit"
+      xpath => [
+        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110150']", "application",
+        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110151']", "application-launcher",
+        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110152']", "destination",
+        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110153']", "source",
+        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110154']", "destination-media",
+        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110155']", "source-media"
+      ]
+    }
+    if [application] {
+      xml {
+        source => "application"
+        target => "ActiveParticipantApplication"
+        remove_field => [ "application" ]
+      }
+    }
+    if [application-launcher] {
+      xml {
+        source => "application-launcher"
+        target => "ActiveParticipantApplicationLauncher"
+        remove_field => [ "application-launcher" ]
+      }
+    }
+    if [destination] {
+      xml {
+        source => "destination"
+        target => "ActiveParticipantDestination"
+        remove_field => [ "destination" ]
+      }
+    }
+    if [source] {
+      xml {
+        source => "source"
+        target => "ActiveParticipantSource"
+        remove_field => [ "source" ]
+      }
+    }
+    if [destination-media] {
+      xml {
+        source => "destination-media"
+        target => "ActiveParticipantDestinationMedia"
+        remove_field => [ "destination-media" ]
+      }
+    }
+    if [source-media] {
+      xml {
+        source => "source-media"
+        target => "ActiveParticipantSourceMedia"
+        remove_field => [ "source-media" ]
+      }
+    }
+  }
+}
+
+output {
+  elasticsearch {
+    hosts => ["elasticsearch:9200"]
+  }
+}
