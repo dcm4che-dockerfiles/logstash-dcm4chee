@@ -25,6 +25,7 @@ filter {
       source => "message"
       target => "audit"
       xpath => [
+        "/AuditMessage/ActiveParticipant[@UserIsRequestor="true"], "requestor",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110150']", "application",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110151']", "application-launcher",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110152']", "destination",
@@ -32,6 +33,13 @@ filter {
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110154']", "destination-media",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110155']", "source-media"
       ]
+    }
+    if [requestor] {
+      xml {
+        source => "requestor"
+        target => "ActiveParticipantRequestor"
+        remove_field => [ "requestor" ]
+      }
     }
     if [application] {
       xml {
