@@ -11,6 +11,11 @@ input {
 }
 
 filter {
+  if [type] == "wildfly" {
+    mutate {
+      rename => { "[mdc][activemq.broker]" => "activemq_broker" }
+    }
+  }
   if [type] == "syslog" {
     grok {
       match => { "message" => "<%{POSINT:syslog_pri}>1 %{TIMESTAMP_ISO8601:syslog_timestamp} %{SYSLOGHOST:syslog_hostname} %{DATA:syslog_program} %{POSINT:syslog_pid} %{DATA:syslog_msgid} - (\xEF\xBB\xBF)?%{GREEDYDATA:message}" }
@@ -76,5 +81,6 @@ filter {
 output {
   elasticsearch {
     hosts => ["elasticsearch:9200"]
+    index => "logstash-%{type}-%{+YYYY.MM.dd}"
   }
 }
