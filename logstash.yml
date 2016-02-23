@@ -25,6 +25,9 @@ filter {
       source => "message"
       target => "audit"
       xpath => [
+        "/AuditMessage/EventIdentification", "event",
+        "/AuditMessage/EventIdentification/EventID", "event-id",
+        "/AuditMessage/AuditSourceIdentification", "audit-source",
         "/AuditMessage/ActiveParticipant[@UserIsRequestor='true']", "requestor",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110150']", "application",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110151']", "application-launcher",
@@ -34,6 +37,27 @@ filter {
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110155']", "source-media",
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='110180']", "study"
       ]
+    }
+    if [event] {
+      xml {
+        source => "event"
+        target => "EventIdentification"
+        remove_field => [ "event" ]
+      }
+    }
+    if [event-id] {
+      xml {
+        source => "event-id"
+        target => "EventID"
+        remove_field => [ "event-id" ]
+      }
+    }
+    if [audit-source] {
+      xml {
+        source => "audit-source"
+        target => "AuditSource"
+        remove_field => [ "audit-source" ]
+      }
     }
     if [requestor] {
       xml {
