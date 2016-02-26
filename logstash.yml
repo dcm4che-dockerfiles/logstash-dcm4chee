@@ -27,6 +27,7 @@ filter {
       xpath => [
         "/AuditMessage/EventIdentification", "event",
         "/AuditMessage/EventIdentification/EventID", "event-id",
+        "/AuditMessage/EventIdentification/EventTypeCode", "event-type-code",
         "/AuditMessage/AuditSourceIdentification", "audit-source",
         "/AuditMessage/ActiveParticipant[@UserIsRequestor='true']", "requestor",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110150']", "application",
@@ -50,6 +51,13 @@ filter {
         source => "event-id"
         target => "EventID"
         remove_field => [ "event-id" ]
+      }
+    }
+    if [event-type-code] {
+      xml {
+        source => "event-type-code"
+        target => "EventTypeCode"
+        remove_field => [ "event-type-code" ]
       }
     }
     if [audit-source] {
