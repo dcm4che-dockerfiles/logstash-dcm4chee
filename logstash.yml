@@ -27,16 +27,20 @@ filter {
       xpath => [
         "/AuditMessage/EventIdentification", "event",
         "/AuditMessage/EventIdentification/EventID", "event-id",
-        "/AuditMessage/EventIdentification/EventTypeCode", "event-type-code",
-        "/AuditMessage/AuditSourceIdentification", "audit-source",
-        "/AuditMessage/ActiveParticipant[@UserIsRequestor='true']", "requestor",
-        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110150']", "application",
-        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110151']", "application-launcher",
-        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110152']", "destination",
-        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110153']", "source",
-        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110154']", "destination-media",
-        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110155']", "source-media",
-        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='110180']", "study"
+        "/AuditMessage/EventIdentification/EventTypeCode[1]", "event-type-code",
+        "/AuditMessage/AuditSourceIdentification[1]", "audit-source",
+        "/AuditMessage/AuditSourceIdentification[2]", "audit-source2",
+        "/AuditMessage/ActiveParticipant[@UserIsRequestor='true'][1]", "requestor",
+        "/AuditMessage/ActiveParticipant[@UserIsRequestor='true'][2]", "requestor2",
+        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110150'][1]", "application",
+        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110151'][1]", "application-launcher",
+        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110152'][1]", "destination",
+        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110152'][2]", "destination2",
+        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110153'][1]", "source",
+        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110153'][2]", "source2",
+        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110154'][1]", "destination-media",
+        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110155'][1]", "source-media",
+        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='110180'][1]", "study"
       ]
     }
     if [event] {
