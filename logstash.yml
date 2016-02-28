@@ -1,7 +1,5 @@
 input {
-  tcp {
-    port => 8000
-    codec => "json"
+  gelf {
     type => "wildfly"
   }
   udp {
