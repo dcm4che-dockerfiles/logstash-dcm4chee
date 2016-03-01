@@ -6,6 +6,11 @@ input {
     port => 8514
     type => "syslog"
   }
+  tcp {
+    port => 8514
+    codec => "frame"
+    type => "syslog"
+  }
 }
 
 filter {
