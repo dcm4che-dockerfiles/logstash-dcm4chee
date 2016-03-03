@@ -11,6 +11,12 @@ input {
     codec => "frame"
     type => "audit"
   }
+  udp {
+     port => 25826
+     buffer_size => 1452
+     codec => collectd { }
+     type => "collectd"
+  }
 }
 
 filter {
