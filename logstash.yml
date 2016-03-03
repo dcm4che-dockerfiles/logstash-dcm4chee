@@ -4,12 +4,12 @@ input {
   }
   udp {
     port => 8514
-    type => "syslog"
+    type => "audit"
   }
   tcp {
     port => 8514
     codec => "frame"
-    type => "syslog"
+    type => "audit"
   }
 }
 
@@ -19,7 +19,7 @@ filter {
       rename => { "[mdc][activemq.broker]" => "activemq_broker" }
     }
   }
-  if [type] == "syslog" {
+  if [type] == "audit" {
     grok {
       match => { "message" => "<%{POSINT:syslog_pri}>1 %{TIMESTAMP_ISO8601:syslog_timestamp} %{SYSLOGHOST:syslog_hostname} %{DATA:syslog_program} %{POSINT:syslog_pid} %{DATA:syslog_msgid} - (\xEF\xBB\xBF)?%{GREEDYDATA:message}" }
       overwrite => [ "message" ]
@@ -32,15 +32,11 @@ filter {
         "/AuditMessage/EventIdentification/EventID", "event-id",
         "/AuditMessage/EventIdentification/EventTypeCode[1]", "event-type-code",
         "/AuditMessage/AuditSourceIdentification[1]", "audit-source",
-        "/AuditMessage/AuditSourceIdentification[2]", "audit-source2",
         "/AuditMessage/ActiveParticipant[@UserIsRequestor='true'][1]", "requestor",
-        "/AuditMessage/ActiveParticipant[@UserIsRequestor='true'][2]", "requestor2",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110150'][1]", "application",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110151'][1]", "application-launcher",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110152'][1]", "destination",
-        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110152'][2]", "destination2",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110153'][1]", "source",
-        "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110153'][2]", "source2",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110154'][1]", "destination-media",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110155'][1]", "source-media",
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='110180'][1]", "study"
@@ -49,7 +45,7 @@ filter {
     if [event] {
       xml {
         source => "event"
-        target => "EventIdentification"
+        target => "Event"
         remove_field => [ "event" ]
       }
     }
@@ -77,56 +73,56 @@ filter {
     if [requestor] {
       xml {
         source => "requestor"
-        target => "ActiveParticipantRequestor"
+        target => "Requestor"
         remove_field => [ "requestor" ]
       }
     }
     if [application] {
       xml {
         source => "application"
-        target => "ActiveParticipantApplication"
+        target => "Application"
         remove_field => [ "application" ]
       }
     }
     if [application-launcher] {
       xml {
         source => "application-launcher"
-        target => "ActiveParticipantApplicationLauncher"
+        target => "ApplicationLauncher"
         remove_field => [ "application-launcher" ]
       }
     }
     if [destination] {
       xml {
         source => "destination"
-        target => "ActiveParticipantDestination"
+        target => "Destination"
         remove_field => [ "destination" ]
       }
     }
     if [source] {
       xml {
         source => "source"
-        target => "ActiveParticipantSource"
+        target => "Source"
         remove_field => [ "source" ]
       }
     }
     if [destination-media] {
       xml {
         source => "destination-media"
-        target => "ActiveParticipantDestinationMedia"
+        target => "DestinationMedia"
         remove_field => [ "destination-media" ]
       }
     }
     if [source-media] {
       xml {
         source => "source-media"
-        target => "ActiveParticipantSourceMedia"
+        target => "SourceMedia"
         remove_field => [ "source-media" ]
       }
     }
     if [study] {
       xml {
         source => "study"
-        target => "ParticipantObjectStudy"
+        target => "Study"
         remove_field => [ "study" ]
       }
     }
