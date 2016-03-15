@@ -45,6 +45,7 @@ filter {
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110153'][1]", "source",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110154'][1]", "destination-media",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110155'][1]", "source-media",
+        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='2'][1]", "patient"
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='110180'][1]", "study"
       ]
     }
@@ -123,6 +124,13 @@ filter {
         source => "source-media"
         target => "SourceMedia"
         remove_field => [ "source-media" ]
+      }
+    }
+    if [patient] {
+      xml {
+        source => "patient"
+        target => "Patient"
+        remove_field => [ "patient" ]
       }
     }
     if [study] {
