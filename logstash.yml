@@ -138,15 +138,16 @@ filter {
         source => "study"
         target => "Study"
         xpath => [
-          "/ParticipantObjectIdentification/Accession[1]", "accession"
+          "/ParticipantObjectIdentification/Accession[1]/@Number", "AccessionNumber",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='StudyDate']/@value", "studyDate"
         ]
         remove_field => [ "study" ]
       }
-      if [accession] {
-        xml {
-          source => "accession"
-          target => "Accession"
-          remove_field => [ "accession" ]
+      if [studyDate] {
+        ruby {
+          init => "require 'base64'"
+          code => "event['StudyDate'] = Base64.decode64(event['studyDate'])"
+          remove_field => [ "studyDate" ]
         }
       }
     }
