@@ -146,7 +146,7 @@ filter {
       if [studyDate] {
         ruby {
           init => "require 'base64'"
-          code => "event['StudyDate'] = Base64.decode64(event['studyDate'][1])"
+          code => "event['StudyDate'] = Base64.decode64(event['studyDate'][0])"
           remove_field => [ "studyDate" ]
         }
       }
