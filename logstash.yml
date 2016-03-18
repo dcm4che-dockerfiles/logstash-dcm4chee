@@ -137,7 +137,17 @@ filter {
       xml {
         source => "study"
         target => "Study"
+        xpath => [
+          "/ParticipantObjectIdentification/Accession[1]", "accession"
+        ]
         remove_field => [ "study" ]
+      }
+      if [accession] {
+        xml {
+          source => "accession"
+          target => "Accession"
+          remove_field => [ "accession" ]
+        }
       }
     }
   }
