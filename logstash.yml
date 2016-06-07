@@ -138,7 +138,7 @@ filter {
         source => "study"
         target => "Study"
         xpath => [
-          "/ParticipantObjectIdentification/Accession[1]/@Number", "AccessionNumber",
+          "/ParticipantObjectIdentification/ParticipantObjectDescription[1]/Accession[1]/@Number", "AccessionNumber",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='StudyDate']/@value", "studyDate"
         ]
         remove_field => [ "study" ]
