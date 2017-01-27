@@ -1,4 +1,4 @@
-FROM logstash:2.4
+FROM logstash:5.1.2
 
 RUN /opt/logstash/bin/plugin install logstash-codec-frame
 
