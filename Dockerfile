@@ -1,4 +1,4 @@
-FROM logstash:5.1.2
+FROM logstash:5.2.2
 
 RUN /usr/share/logstash/bin/logstash-plugin install --version 5.0.0 logstash-codec-frame
 
