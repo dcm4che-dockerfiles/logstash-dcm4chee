@@ -156,7 +156,7 @@ filter {
 
 output {
   elasticsearch {
-    hosts => ["elasticsearch:9200"]
+    hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
     index => "logstash-%{type}-%{+YYYY.MM.dd}"
   }
 }
