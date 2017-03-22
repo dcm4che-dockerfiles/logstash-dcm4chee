@@ -138,6 +138,7 @@ filter {
         source => "study"
         target => "Study"
         xpath => [
+          "/ParticipantObjectIdentification/@ParticipantObjectDataLifeCycle", "ParticipantObjectDataLifeCycle",
           "/ParticipantObjectIdentification/ParticipantObjectDescription[1]/Accession[1]/@Number", "AccessionNumber",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='StudyDate']/@value", "studyDate"
         ]
