@@ -46,7 +46,8 @@ filter {
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110154'][1]", "destination-media",
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110155'][1]", "source-media",
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='2'][1]", "patient",
-        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='110180'][1]", "study"
+        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='110180'][1]", "study",
+        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='113877'][1]", "device"
       ]
     }
     if [event] {
@@ -149,6 +150,23 @@ filter {
           init => "require 'base64'"
           code => "event.set('StudyDate', Base64.decode64(event.get('studyDate')[0]))"
           remove_field => [ "studyDate" ]
+        }
+      }
+    }
+    if [device] {
+      xml {
+        source => "device"
+        target => "Device"
+        xpath => [
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='Alert Description']/@value", "alertDescription"
+        ]
+        remove_field => [ "device" ]
+      }
+      if [alertDescription] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('AlertDescription', Base64.decode64(event.get('alertDescription')[0]))"
+          remove_field => [ "alertDescription" ]
         }
       }
     }
