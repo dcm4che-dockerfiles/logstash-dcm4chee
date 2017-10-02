@@ -131,7 +131,17 @@ filter {
       xml {
         source => "patient"
         target => "Patient"
+        xpath => [
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2']/@value", "hl7v2"
+        ]
         remove_field => [ "patient" ]
+      }
+      if [hl7v2] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('HL7v2', Base64.decode64(event.get('hl7v2')[0]).gsub('\r','\n'))"
+          remove_field => [ "hl7v2" ]
+        }
       }
     }
     if [study] {
