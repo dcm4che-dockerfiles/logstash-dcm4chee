@@ -3,17 +3,28 @@ input {
     type => "wildfly"
   }
   udp {
-    port => 8514
+    port => "${SYSLOG_UDP_PORT}"
     type => "audit"
   }
   tcp {
-    port => 8514
+    port => "${SYSLOG_TCP_PORT}"
     codec => "frame"
     type => "audit"
   }
+  tcp {
+    port => "${SYSLOG_TLS_PORT}"
+    codec => "frame"
+    type => "audit"
+    ssl_enable => true
+    ssl_cert => "${SSL_CERT}"
+    ssl_extra_chain_certs => "${SSL_EXTRA_CHAIN_CERTS}"
+    ssl_key => "${SSL_KEY}"
+    ssl_key_passphrase => "${SSL_KEY_PASSPHRASE}"
+    ssl_verify => "${SSL_VERIFY}"
+  }
   udp {
-     port => 25826
-     buffer_size => 1452
+     port => "${COLLECTD_PORT}"
+     buffer_size => "${COLLECTD_BUFFER_SIZE}"
      codec => collectd { }
      type => "collectd"
   }
