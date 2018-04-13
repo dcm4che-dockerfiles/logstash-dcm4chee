@@ -79,6 +79,6 @@ Verify the identity of the other end of the SSL connection against the CA. Defau
 
 UDP port on which Logstash is listening for collectd messages. Default value is `25826`.
 
-#### `COLLECTD_PORT`
+#### `COLLECTD_BUFFER_SIZE`
 
 The maximum packet size to read from the network by the UDP listener for collectd messages. Default value is `1452`.
