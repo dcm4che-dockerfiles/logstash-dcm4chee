@@ -4,13 +4,9 @@ This docker image provides Logstash initalized for receiving system and audit lo
 [dcm4chee-arc-light](https://github.com/dcm4che/dcm4chee-arc-light/wiki).
 It extends the [official logstash image](https://www.elastic.co/guide/en/logstash/current/docker.html).
 
-## Supported tags and respective `Dockerfile` links
-
-- [`6.2.3-5` (*6.2.3/Dockerfile*)](https://github.com/dcm4che-dockerfiles/logstash-dcm4chee/blob/master/Dockerfile)
-
 ## How to use this image
 
-See [Running on Docker](https://github.com/dcm4che/dcm4chee-arc-light/wiki/Running-on-Docker) at the
+See [Run all archive services with secured UI and storing System and Audit logs to Elastic Stack on a single host](https://github.com/dcm4che/dcm4chee-arc-light/wiki/Run-all-archive-services-with-secured-UI-and-storing-System-and-Audit-logs-to-Elastic-Stack-on-a-single-host) at the
 [dcm4che Archive 5 Wiki](https://github.com/dcm4che/dcm4chee-arc-light/wiki).
 
 ## Environment Variables 
@@ -19,19 +15,6 @@ Below explained environment variables can be set as per one's application to ove
 An example of how one can set an env variable in `docker run` command is shown below :
 
     -e SSL_VERIFY=false
-
-ENV ELASTICSEARCH_HOST=elasticsearch \
-    ELASTICSEARCH_PORT=9200 \
-    SYSLOG_UDP_PORT=8514 \
-    SYSLOG_TCP_PORT=8514 \
-    SYSLOG_TLS_PORT=6514 \
-    SSL_CERT=/etc/certs/cert.pem \
-    SSL_EXTRA_CHAIN_CERTS=/etc/certs/ca.pem \
-    SSL_KEY=/etc/certs/key.pem \
-    SSL_KEY_PASSPHRASE=secret \
-    SSL_VERIFY=true \
-    COLLECTD_PORT=25826 \
-    COLLECTD_BUFFER_SIZE=1452
 
 #### `ELASTICSEARCH_HOST`
 
