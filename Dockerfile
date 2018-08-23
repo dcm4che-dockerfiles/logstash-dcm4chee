@@ -1,4 +1,4 @@
-FROM docker.elastic.co/logstash/logstash-oss:6.2.3
+FROM docker.elastic.co/logstash/logstash-oss:6.3.2
 
 RUN /usr/share/logstash/bin/logstash-plugin install --version 5.0.0 logstash-codec-frame
 
