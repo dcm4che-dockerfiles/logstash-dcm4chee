@@ -143,7 +143,7 @@ filter {
         source => "patient"
         target => "Patient"
         xpath => [
-          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message']/@value", "hl7v2Message"
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message']/@value", "hl7v2Message",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message'][2]/@value", "hl7v2Message2"
         ]
         remove_field => [ "patient" ]
@@ -171,7 +171,7 @@ filter {
           "/ParticipantObjectIdentification/@ParticipantObjectDataLifeCycle", "ParticipantObjectDataLifeCycle",
           "/ParticipantObjectIdentification/ParticipantObjectDescription[1]/Accession[1]/@Number", "AccessionNumber",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='StudyDate']/@value", "studyDate",
-          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message']/@value", "hl7v2Message"
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message']/@value", "hl7v2Message",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message'][2]/@value", "hl7v2Message2"
         ]
         remove_field => [ "study" ]
