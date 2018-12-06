@@ -1,4 +1,4 @@
-FROM docker.elastic.co/logstash/logstash-oss:6.5.1
+FROM docker.elastic.co/logstash/logstash-oss:6.4.3
 
 RUN /usr/share/logstash/bin/logstash-plugin install --version 5.0.0 logstash-codec-frame
 
@@ -16,6 +16,7 @@ ENV ELASTICSEARCH_HOST=elasticsearch \
     SSL_KEY_PASSPHRASE=secret \
     SSL_VERIFY=true \
     COLLECTD_PORT=25826 \
-    COLLECTD_BUFFER_SIZE=1452
+    COLLECTD_BUFFER_SIZE=1452 \
+    HL7_CHARSET=ISO-8859-1
 
 CMD ["logstash", "-f", "/etc/logstash.yml"]

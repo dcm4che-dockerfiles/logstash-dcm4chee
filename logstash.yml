@@ -151,14 +151,14 @@ filter {
       if [hl7v2Message] {
         ruby {
           init => "require 'base64'"
-          code => "event.set('HL7v2Message', Base64.decode64(event.get('hl7v2Message')[0]).gsub('\r','\n'))"
+          code => "event.set('HL7v2Message', Base64.decode64(event.get('hl7v2Message')[0]).gsub('\r','\n').force_encoding('${HL7_CHARSET}').encode('UTF-8'))"
           remove_field => [ "hl7v2Message" ]
         }
       }
       if [hl7v2Message2] {
         ruby {
           init => "require 'base64'"
-          code => "event.set('HL7v2Message2', Base64.decode64(event.get('hl7v2Message2')[0]).gsub('\r','\n'))"
+          code => "event.set('HL7v2Message2', Base64.decode64(event.get('hl7v2Message2')[0]).gsub('\r','\n').force_encoding('${HL7_CHARSET}').encode('UTF-8'))"
           remove_field => [ "hl7v2Message2" ]
         }
       }
@@ -186,14 +186,14 @@ filter {
       if [hl7v2Message] {
         ruby {
           init => "require 'base64'"
-          code => "event.set('HL7v2Message', Base64.decode64(event.get('hl7v2Message')[0]).gsub('\r','\n'))"
+          code => "event.set('HL7v2Message', Base64.decode64(event.get('hl7v2Message')[0]).gsub('\r','\n').force_encoding('${HL7_CHARSET}').encode('UTF-8'))"
           remove_field => [ "hl7v2Message" ]
         }
       }
       if [hl7v2Message2] {
         ruby {
           init => "require 'base64'"
-          code => "event.set('HL7v2Message2', Base64.decode64(event.get('hl7v2Message2')[0]).gsub('\r','\n'))"
+          code => "event.set('HL7v2Message2', Base64.decode64(event.get('hl7v2Message2')[0]).gsub('\r','\n').force_encoding('${HL7_CHARSET}').encode('UTF-8'))"
           remove_field => [ "hl7v2Message2" ]
         }
       }

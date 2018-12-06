@@ -65,3 +65,7 @@ UDP port on which Logstash is listening for collectd messages. Default value is 
 #### `COLLECTD_BUFFER_SIZE`
 
 The maximum packet size to read from the network by the UDP listener for collectd messages. Default value is `1452`.
+
+#### `HL7_CHARSET`
+
+Character Set of HL7 v2 messages in received Audit messages. Default value is `ISO-8859-1`.
