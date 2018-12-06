@@ -19,7 +19,7 @@ input {
     ssl_cert => "${SSL_CERT}"
     ssl_extra_chain_certs => "${SSL_EXTRA_CHAIN_CERTS}"
     ssl_key => "${SSL_KEY}"
-    ssl_key_passphrase => "${SSL_KEY_PASSPHRASE}"
+    ssl_key_passphrase => "${SSL_KEY_PASSWORD}"
     ssl_verify => "${SSL_VERIFY}"
   }
   udp {

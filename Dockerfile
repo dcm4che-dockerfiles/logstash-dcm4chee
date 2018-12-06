@@ -13,10 +13,14 @@ ENV ELASTICSEARCH_HOST=elasticsearch \
     SSL_CERT=/etc/certs/cert.pem \
     SSL_EXTRA_CHAIN_CERTS=/etc/certs/ca.pem \
     SSL_KEY=/etc/certs/key.pem \
-    SSL_KEY_PASSPHRASE=secret \
+    SSL_KEY_PASSWORD=secret \
+    SSL_KEY_PASSWORD_FILE=/tmp/key_password \
     SSL_VERIFY=true \
     COLLECTD_PORT=25826 \
     COLLECTD_BUFFER_SIZE=1452 \
     HL7_CHARSET=ISO-8859-1
 
+COPY docker-entrypoint.sh /
+
+ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["logstash", "-f", "/etc/logstash.yml"]

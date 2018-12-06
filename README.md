@@ -50,9 +50,15 @@ Path to the SSL certificate of the certification authority (CA) used by the TLS 
 
 Path to the SSL key used by the TLS listener. Default value is `/etc/certs/key.pem`.
 
-#### `SSL_KEY_PASSPHRASE`
+#### `SSL_KEY_PASSWORD`
 
-Passphrase of the SSL key used by the TLS listener. Default value is `secret`.
+Password of the SSL key used by the TLS listener. Default value is `secret`.
+
+#### `SSL_KEY_PASSWORD_FILE`
+
+Path to file containing the password of the SSL key used by the TLS listener.
+If the file does not exist, it will be created containing the password specified by `SSL_KEY_PASSWORD`. 
+Default value is `/tmp/key_password`.
 
 #### `SSL_VERIFY`
 
