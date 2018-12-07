@@ -14,7 +14,7 @@ See [Run all archive services with secured UI and storing System and Audit logs 
 Below explained environment variables can be set as per one's application to override the default values if need be.
 An example of how one can set an env variable in `docker run` command is shown below :
 
-    -e SSL_VERIFY=false
+    -e SSL_VERIFY=true
 
 #### `ELASTICSEARCH_HOST`
 
@@ -62,7 +62,7 @@ Default value is `/tmp/key_password`.
 
 #### `SSL_VERIFY`
 
-Verify the identity of the other end of the SSL connection against the CA. Default value is `true`.
+Verify the identity of the other end of the SSL connection against the CA. Default value is `false`.
 
 #### `COLLECTD_PORT`
 

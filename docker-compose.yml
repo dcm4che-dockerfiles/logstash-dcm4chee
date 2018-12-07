@@ -44,6 +44,7 @@ services:
       - "8514:8514"
       - "6514:6514"
       - "25826:25826/udp"
+      - "9600:9600"
     depends_on:
       - elasticsearch
     volumes:
