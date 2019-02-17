@@ -1,6 +1,7 @@
 FROM docker.elastic.co/logstash/logstash-oss:6.4.3
 
-RUN /usr/share/logstash/bin/logstash-plugin install --version 5.0.0 logstash-codec-frame
+RUN /usr/share/logstash/bin/logstash-plugin install --version 5.0.0 logstash-codec-frame && \
+    /usr/share/logstash/bin/logstash-plugin install --version 6.4.3 logstash-filter-hashtree
 
 COPY logstash.yml /etc/logstash.yml
 COPY certs /etc/certs
@@ -16,6 +17,10 @@ ENV ELASTICSEARCH_HOST=elasticsearch \
     SSL_KEY_PASSWORD=secret \
     SSL_KEY_PASSWORD_FILE=/tmp/key_password \
     SSL_VERIFY=false \
+    HASHTREE_TARGET=fingerprint \
+    HASHTREE_PREVIOUS=fingerprint_previous \
+    HASHTREE_FILE=/usr/share/logstash/data/filter-hashtree \
+    HASHTREE_METHOD=SHA1 \
     COLLECTD_PORT=25826 \
     COLLECTD_BUFFER_SIZE=1452 \
     HL7_CHARSET=ISO-8859-1

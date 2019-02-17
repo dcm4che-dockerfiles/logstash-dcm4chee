@@ -64,6 +64,25 @@ Default value is `/tmp/key_password`.
 
 Verify the identity of the other end of the SSL connection against the CA. Default value is `false`.
 
+#### `HASHTREE_TARGET`
+
+The name of the field where the fingerprint of the audit message will be stored. Default value is `fingerprint`.
+
+#### `HASHTREE_PREVIOUS`
+
+The name of the field where the fingerprint of the previous audit message will be stored.
+Default value is `fingerprint_previous`.
+
+#### `HASHTREE_FILE`
+
+Path of the file where the fingerprint of the previous audit message is stored.
+Default value is `/usr/share/logstash/data/filter-hashtree`.
+
+#### `HASHTREE_METHOD`
+
+The fingerprint method to use. Enumerated values: 'SHA1', 'SHA256', 'SHA384', 'SHA512', 'MD5'.
+Default value is `SHA1`.
+
 #### `COLLECTD_PORT`
 
 UDP port on which Logstash is listening for collectd messages. Default value is `25826`.

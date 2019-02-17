@@ -41,6 +41,12 @@ filter {
       match => { "message" => "<%{POSINT:syslog_pri}>1 %{TIMESTAMP_ISO8601:syslog_timestamp} %{NOTSPACE:syslog_hostname} %{NOTSPACE:syslog_program} %{NOTSPACE:syslog_pid} %{NOTSPACE:syslog_msgid} - (\xEF\xBB\xBF)?%{GREEDYDATA:message}" }
       overwrite => [ "message" ]
     }
+    hashtree {
+      target => ${HASHTREE_TARGET}
+      previous => ${HASHTREE_PREVIOUS}
+      file => ${HASHTREE_FILE}
+      method => ${HASHTREE_METHOD}
+    }
     xml {
       source => "message"
       target => "audit"
