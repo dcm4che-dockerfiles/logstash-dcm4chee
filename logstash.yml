@@ -42,10 +42,10 @@ filter {
       overwrite => [ "message" ]
     }
     hashtree {
-      target => ${HASHTREE_TARGET}
-      previous => ${HASHTREE_PREVIOUS}
-      file => ${HASHTREE_FILE}
-      method => ${HASHTREE_METHOD}
+      target => "${HASHTREE_TARGET}"
+      previous => "${HASHTREE_PREVIOUS}"
+      file => "${HASHTREE_FILE}"
+      method => "${HASHTREE_METHOD}"
     }
     xml {
       source => "message"
