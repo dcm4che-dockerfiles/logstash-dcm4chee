@@ -9,9 +9,6 @@ if [ "$1" = 'logstash' ]; then
     else
         echo $SSL_KEY_PASSWORD > $SSL_KEY_PASSWORD_FILE
     fi
-
-    chown -R logstash:logstash /usr/share/logstash/data
-
 fi
 
 exec "$@"
