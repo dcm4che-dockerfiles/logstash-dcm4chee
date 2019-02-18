@@ -75,7 +75,9 @@ Default value is `fingerprint_previous`.
 
 #### `HASHTREE_FILE`
 
-Path of the file where the fingerprint of the previous audit message is stored.
+Path of the file where the fingerprint of the previous audit message is stored. **Attention:** You have to mount
+the file or parent directory to a volume or host directory to avoid to start a new hash tree on every re-creation
+of the container. The file (or parent directory) must be writable by the logstash user of the container (uid=1000).
 Default value is `/usr/share/logstash/data/filter-hashtree`.
 
 #### `HASHTREE_METHOD`
