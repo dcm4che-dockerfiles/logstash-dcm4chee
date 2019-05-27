@@ -56,9 +56,7 @@ Password of the SSL key used by the TLS listener. Default value is `secret`.
 
 #### `SSL_KEY_PASSWORD_FILE`
 
-Path to file containing the password of the SSL key used by the TLS listener.
-If the file does not exist, it will be created containing the password specified by `SSL_KEY_PASSWORD`. 
-Default value is `/tmp/key_password`.
+Password of the SSL key used by the TLS listener via file input (alternative to `SSL_KEY_PASSWORD`).
 
 #### `SSL_VERIFY`
 
