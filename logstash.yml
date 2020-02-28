@@ -222,6 +222,6 @@ output {
   elasticsearch {
     hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
     index => "logstash-%{type}-%{+YYYY.MM.dd}"
-    manage_template => ${MANAGE_TEMPLATE}
+    manage_template => "${MANAGE_TEMPLATE}"
   }
 }
