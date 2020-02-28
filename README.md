@@ -62,6 +62,11 @@ Password of the SSL key used by the TLS listener via file input (alternative to 
 
 Verify the identity of the other end of the SSL connection against the CA. Default value is `false`.
 
+#### `MANAGE_TEMPLATE`
+
+Indicates to [apply a default template to Elasticsearch during startup](https://www.elastic.co/guide/en/logstash/current/plugins-outputs-elasticsearch.html#plugins-outputs-elasticsearch-manage_template).
+Default value is `true`.
+
 #### `HASHTREE_TARGET`
 
 The name of the field where the fingerprint of the audit message will be stored. Default value is `fingerprint`.
@@ -82,14 +87,6 @@ Default value is `/usr/share/logstash/data/filter-hashtree`.
 
 The fingerprint method to use. Enumerated values: 'SHA1', 'SHA256', 'SHA384', 'SHA512', 'MD5'.
 Default value is `SHA1`.
-
-#### `COLLECTD_PORT`
-
-UDP port on which Logstash is listening for collectd messages. Default value is `25826`.
-
-#### `COLLECTD_BUFFER_SIZE`
-
-The maximum packet size to read from the network by the UDP listener for collectd messages. Default value is `1452`.
 
 #### `HL7_CHARSET`
 

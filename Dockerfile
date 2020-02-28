@@ -1,4 +1,4 @@
-FROM logstash:7.5.1
+FROM logstash:7.6.0
 
 RUN /usr/share/logstash/bin/logstash-plugin install --version 5.0.0 logstash-codec-frame && \
     /usr/share/logstash/bin/logstash-plugin install --version 6.4.3 logstash-filter-hashtree
@@ -15,12 +15,11 @@ ENV ELASTICSEARCH_HOST=elasticsearch \
     SSL_EXTRA_CHAIN_CERTS=/etc/certs/ca.pem \
     SSL_KEY=/etc/certs/key.pem \
     SSL_VERIFY=false \
+    MANAGE_TEMPLATE=true \
     HASHTREE_TARGET=fingerprint \
     HASHTREE_PREVIOUS=fingerprint_previous \
     HASHTREE_FILE=/usr/share/logstash/data/filter-hashtree \
     HASHTREE_METHOD=SHA1 \
-    COLLECTD_PORT=25826 \
-    COLLECTD_BUFFER_SIZE=1452 \
     HL7_CHARSET=ISO-8859-1
 
 COPY docker-entrypoint.sh /

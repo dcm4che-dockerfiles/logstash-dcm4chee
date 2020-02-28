@@ -22,12 +22,6 @@ input {
     ssl_key_passphrase => "${SSL_KEY_PASSWORD}"
     ssl_verify => "${SSL_VERIFY}"
   }
-  udp {
-     port => "${COLLECTD_PORT}"
-     buffer_size => "${COLLECTD_BUFFER_SIZE}"
-     codec => collectd { }
-     type => "collectd"
-  }
 }
 
 filter {
@@ -228,5 +222,6 @@ output {
   elasticsearch {
     hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
     index => "logstash-%{type}-%{+YYYY.MM.dd}"
+    manage_template => ${MANAGE_TEMPLATE}
   }
 }
