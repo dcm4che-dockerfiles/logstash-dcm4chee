@@ -62,6 +62,10 @@ Password of the SSL key used by the TLS listener via file input (alternative to 
 
 Verify the identity of the other end of the SSL connection against the CA. Default value is `false`.
 
+#### `SSL_CERTIFICATE_AUTHORITIES`
+
+Validate client certificate or certificate chain against this certification authority (CA). Default value is `/etc/certs/ca.pem`.
+
 #### `MANAGE_TEMPLATE`
 
 Indicates to [apply a default template to Elasticsearch during startup](https://www.elastic.co/guide/en/logstash/current/plugins-outputs-elasticsearch.html#plugins-outputs-elasticsearch-manage_template).

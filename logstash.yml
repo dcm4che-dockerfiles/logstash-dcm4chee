@@ -21,6 +21,7 @@ input {
     ssl_key => "${SSL_KEY}"
     ssl_key_passphrase => "${SSL_KEY_PASSWORD}"
     ssl_verify => "${SSL_VERIFY}"
+    ssl_certificate_authorities => "${SSL_CERTIFICATE_AUTHORITIES}"
   }
 }
 

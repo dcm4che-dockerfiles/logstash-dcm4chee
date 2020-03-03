@@ -15,6 +15,7 @@ ENV ELASTICSEARCH_HOST=elasticsearch \
     SSL_EXTRA_CHAIN_CERTS=/etc/certs/ca.pem \
     SSL_KEY=/etc/certs/key.pem \
     SSL_VERIFY=false \
+    SSL_CERTIFICATE_AUTHORITIES=/etc/certs/ca.pem \
     MANAGE_TEMPLATE=true \
     HASHTREE_TARGET=fingerprint \
     HASHTREE_PREVIOUS=fingerprint_previous \
