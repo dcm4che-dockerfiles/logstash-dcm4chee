@@ -1,4 +1,4 @@
-FROM logstash:7.8.0
+FROM logstash:7.9.1
 
 RUN /usr/share/logstash/bin/logstash-plugin install --version 5.0.0 logstash-codec-frame && \
     /usr/share/logstash/bin/logstash-plugin install --version 6.4.3 logstash-filter-hashtree
@@ -8,6 +8,7 @@ COPY certs /etc/certs
 
 ENV ELASTICSEARCH_HOST=elasticsearch \
     ELASTICSEARCH_PORT=9200 \
+    ELASTICSEARCH_INDEX="logstash-%{type}-%{+YYYY.MM.dd}" \
     SYSLOG_UDP_PORT=8514 \
     SYSLOG_TCP_PORT=8514 \
     SYSLOG_TLS_PORT=6514 \
