@@ -222,7 +222,7 @@ filter {
 output {
   elasticsearch {
     hosts => ["${ELASTICSEARCH_HOST}:${ELASTICSEARCH_PORT}"]
-    index => "logstash-%{type}-%{+YYYY.MM.dd}"
+    index => "${ELASTICSEARCH_INDEX}"
     manage_template => "${MANAGE_TEMPLATE}"
   }
 }

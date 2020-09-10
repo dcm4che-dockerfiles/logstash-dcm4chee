@@ -24,6 +24,13 @@ Hostname of Elasticsearch to which logs are stored. Default value is `elasticsea
 
 Port of Elasticsearch to which logs are stored. Default value is `9200`.
 
+#### `ELASTICSEARCH_INDEX`
+
+The index to write events to. This can be dynamic using the %{foo} syntax. Indexes may not contain uppercase characters.
+For weekly indexes ISO 8601 format is recommended, eg. `logstash-%{+xxxx.ww}`.
+Logstash uses [Joda](http://www.joda.org/joda-time/apidocs/org/joda/time/format/DateTimeFormat.html) to format the
+index pattern from event timestamp. Default value is `logstash-%{type}-%{+YYYY.MM.dd}`.
+
 #### `SYSLOG_UDP_PORT`
 
 UDP port on which Logstash is listening for audit messages according
