@@ -3,11 +3,12 @@ services:
   elasticsearch:
     image: elasticsearch:7.10.1
     environment:
-      ES_JAVA_OPTS: -Xms1024m -Xmx1024m
-      TAKE_FILE_OWNERSHIP: 1
+      ES_JAVA_OPTS: -Xms512m -Xmx512m
       http.cors.enabled: "true"
       http.cors.allow-origin: "/.*/"
       http.cors.allow-headers: "X-Requested-With,Content-Length,Content-Type,Authorization"
+      discovery.type: single-node
+      TAKE_FILE_OWNERSHIP: 1
     logging:
       driver: json-file
       options:
