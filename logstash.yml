@@ -145,7 +145,9 @@ filter {
         target => "Patient"
         xpath => [
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message']/@value", "hl7v2Message",
-          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message'][2]/@value", "hl7v2Message2"
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message'][2]/@value", "hl7v2Message2",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7 Message Type']/@value", "hl7v2MessageType",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7 Message Control ID'][2]/@value", "hl7v2MessageControlID"
         ]
         remove_field => [ "patient" ]
       }
@@ -163,6 +165,20 @@ filter {
           remove_field => [ "hl7v2Message2" ]
         }
       }
+      if [hl7v2MessageType] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('HL7v2MessageType', Base64.decode64(event.get('hl7v2MessageType')[0]))"
+          remove_field => [ "hl7v2MessageType" ]
+        }
+      }
+      if [hl7v2MessageControlID] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('HL7v2MessageControlID', Base64.decode64(event.get('hl7v2MessageControlID')[0]))"
+          remove_field => [ "hl7v2MessageControlID" ]
+        }
+      }
     }
     if [study] {
       xml {
@@ -173,7 +189,9 @@ filter {
           "/ParticipantObjectIdentification/ParticipantObjectDescription[1]/Accession[1]/@Number", "AccessionNumber",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='StudyDate']/@value", "studyDate",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message']/@value", "hl7v2Message",
-          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message'][2]/@value", "hl7v2Message2"
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message'][2]/@value", "hl7v2Message2",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7 Message Type']/@value", "hl7v2MessageType",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7 Message Control ID'][2]/@value", "hl7v2MessageControlID"
         ]
         remove_field => [ "study" ]
       }
@@ -196,6 +214,20 @@ filter {
           init => "require 'base64'"
           code => "event.set('HL7v2Message2', Base64.decode64(event.get('hl7v2Message2')[0]).gsub('\r','\n').force_encoding('${HL7_CHARSET}').encode('UTF-8'))"
           remove_field => [ "hl7v2Message2" ]
+        }
+      }
+      if [hl7v2MessageType] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('HL7v2MessageType', Base64.decode64(event.get('hl7v2MessageType')[0]))"
+          remove_field => [ "hl7v2MessageType" ]
+        }
+      }
+      if [hl7v2MessageControlID] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('HL7v2MessageControlID', Base64.decode64(event.get('hl7v2MessageControlID')[0]))"
+          remove_field => [ "hl7v2MessageControlID" ]
         }
       }
     }
