@@ -146,8 +146,10 @@ filter {
         xpath => [
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message']/@value", "hl7v2Message",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message'][2]/@value", "hl7v2Message2",
-          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7 Message Type']/@value", "hl7v2MessageType",
-          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7 Message Control ID'][2]/@value", "hl7v2MessageControlID"
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH-9']/@value", "msh_9",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH-10'][2]/@value", "msh_10"
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH2-9']/@value", "msh2_9",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH2-10'][2]/@value", "msh2_10"
         ]
         remove_field => [ "patient" ]
       }
@@ -165,18 +167,32 @@ filter {
           remove_field => [ "hl7v2Message2" ]
         }
       }
-      if [hl7v2MessageType] {
+      if [msh_9] {
         ruby {
           init => "require 'base64'"
-          code => "event.set('HL7v2MessageType', Base64.decode64(event.get('hl7v2MessageType')[0]))"
-          remove_field => [ "hl7v2MessageType" ]
+          code => "event.set('MSH_9', Base64.decode64(event.get('msh_9')[0]))"
+          remove_field => [ "msh_9" ]
         }
       }
-      if [hl7v2MessageControlID] {
+      if [msh_10] {
         ruby {
           init => "require 'base64'"
-          code => "event.set('HL7v2MessageControlID', Base64.decode64(event.get('hl7v2MessageControlID')[0]))"
-          remove_field => [ "hl7v2MessageControlID" ]
+          code => "event.set('MSH_10', Base64.decode64(event.get('msh_10')[0]))"
+          remove_field => [ "msh_10" ]
+        }
+      }
+      if [msh2_9] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('MSH2_9', Base64.decode64(event.get('msh2_9')[0]))"
+          remove_field => [ "msh2_9" ]
+        }
+      }
+      if [msh2_10] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('MSH2_10', Base64.decode64(event.get('msh2_10')[0]))"
+          remove_field => [ "msh2_10" ]
         }
       }
     }
@@ -190,8 +206,10 @@ filter {
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='StudyDate']/@value", "studyDate",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message']/@value", "hl7v2Message",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message'][2]/@value", "hl7v2Message2",
-          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7 Message Type']/@value", "hl7v2MessageType",
-          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7 Message Control ID'][2]/@value", "hl7v2MessageControlID"
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH-9']/@value", "msh_9",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH-10'][2]/@value", "msh_10"
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH2-9']/@value", "msh2_9",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH2-10'][2]/@value", "msh2_10"
         ]
         remove_field => [ "study" ]
       }
@@ -216,18 +234,32 @@ filter {
           remove_field => [ "hl7v2Message2" ]
         }
       }
-      if [hl7v2MessageType] {
+      if [msh_9] {
         ruby {
           init => "require 'base64'"
-          code => "event.set('HL7v2MessageType', Base64.decode64(event.get('hl7v2MessageType')[0]))"
-          remove_field => [ "hl7v2MessageType" ]
+          code => "event.set('MSH_9', Base64.decode64(event.get('msh_9')[0]))"
+          remove_field => [ "msh_9" ]
         }
       }
-      if [hl7v2MessageControlID] {
+      if [msh_10] {
         ruby {
           init => "require 'base64'"
-          code => "event.set('HL7v2MessageControlID', Base64.decode64(event.get('hl7v2MessageControlID')[0]))"
-          remove_field => [ "hl7v2MessageControlID" ]
+          code => "event.set('MSH_10', Base64.decode64(event.get('msh_10')[0]))"
+          remove_field => [ "msh_10" ]
+        }
+      }
+      if [msh2_9] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('MSH2_9', Base64.decode64(event.get('msh2_9')[0]))"
+          remove_field => [ "msh2_9" ]
+        }
+      }
+      if [msh2_10] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('MSH2_10', Base64.decode64(event.get('msh2_10')[0]))"
+          remove_field => [ "msh2_10" ]
         }
       }
     }
