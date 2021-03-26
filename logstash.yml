@@ -148,8 +148,8 @@ filter {
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message'][2]/@value", "hl7v2Message2",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH-9']/@value", "msh_9",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH-10'][2]/@value", "msh_10"
-          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH2-9']/@value", "msh2_9",
-          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH2-10'][2]/@value", "msh2_10"
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH-9']/@value", "msh2_9",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH-10'][2]/@value", "msh2_10"
         ]
         remove_field => [ "patient" ]
       }
@@ -208,8 +208,8 @@ filter {
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message'][2]/@value", "hl7v2Message2",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH-9']/@value", "msh_9",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH-10'][2]/@value", "msh_10"
-          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH2-9']/@value", "msh2_9",
-          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH2-10'][2]/@value", "msh2_10"
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH-9']/@value", "msh2_9",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH-10'][2]/@value", "msh2_10"
         ]
         remove_field => [ "study" ]
       }
