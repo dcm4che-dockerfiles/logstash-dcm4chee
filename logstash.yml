@@ -59,7 +59,9 @@ filter {
         "/AuditMessage/ActiveParticipant[RoleIDCode/@csd-code='110155'][1]", "source-media",
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='2'][1]", "patient",
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='110180'][1]", "study",
-        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='113877'][1]", "device"
+        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='113877'][1]", "device",
+        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='TASK'][1]", "task",
+        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='TASKS'][1]", "tasks"
       ]
     }
     if [event] {
@@ -277,6 +279,64 @@ filter {
           init => "require 'base64'"
           code => "event.set('AlertDescription', Base64.decode64(event.get('alertDescription')[0]))"
           remove_field => [ "alertDescription" ]
+        }
+      }
+    }
+    if [task] {
+      xml {
+        source => "task"
+        target => "Task"
+        xpath => [
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='Task']/@value", "queueMsg"
+        ]
+        remove_field => [ "task" ]
+      }
+      if [queueMsg] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('QueueMessage', Base64.decode64(event.get('queueMsg')[0]))"
+          remove_field => [ "queueMsg" ]
+        }
+      }
+    }
+    if [tasks] {
+      xml {
+        source => "tasks"
+        target => "Tasks"
+        xpath => [
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='Filters']/@value", "filters",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='QueueName']/@value", "queueName",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='Count']/@value", "count",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='Failed']/@value", "failed"
+        ]
+        remove_field => [ "tasks" ]
+      }
+      if [filters] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('Filters', Base64.decode64(event.get('filters')[0]))"
+          remove_field => [ "filters" ]
+        }
+      }
+      if [queueName] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('QueueName', Base64.decode64(event.get('queueName')[0]))"
+          remove_field => [ "queueName" ]
+        }
+      }
+      if [count] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('Count', Base64.decode64(event.get('count')[0]))"
+          remove_field => [ "count" ]
+        }
+      }
+      if [failed] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('Failed', Base64.decode64(event.get('failed')[0]))"
+          remove_field => [ "failed" ]
         }
       }
     }
