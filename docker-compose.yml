@@ -9,7 +9,6 @@ services:
       http.cors.allow-headers: "X-Requested-With,Content-Length,Content-Type,Authorization"
       discovery.type: single-node
       xpack.security.enabled: "false"
-      TAKE_FILE_OWNERSHIP: 1
     logging:
       driver: json-file
       options:
