@@ -62,6 +62,8 @@ filter {
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='113877'][1]", "device",
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='TASK'][1]", "task",
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='TASKS'][1]", "tasks"
+        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='QIDO'][1]", "qido"
+        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='110181'][1]", "cfind"
       ]
     }
     if [event] {
@@ -337,6 +339,40 @@ filter {
           init => "require 'base64'"
           code => "event.set('Failed', Base64.decode64(event.get('failed')[0]))"
           remove_field => [ "failed" ]
+        }
+      }
+    }
+    if [qido] {
+      xml {
+          source => "qido"
+          target => "QIDO"
+          xpath => [
+            "/ParticipantObjectIdentification/ParticipantObjectQuery", "qidoParticipantObjectQuery"
+          ]
+          remove_field => [ "qido" ]
+        }
+        if [qidoParticipantObjectQuery] {
+          ruby {
+          init => "require 'base64'"
+          code => "event.set('QIDOParticipantObjectQuery', Base64.decode64(event.get('qidoParticipantObjectQuery')[0]))"
+          remove_field => [ "qidoParticipantObjectQuery" ]
+        }
+      }
+    }
+    if [cfind] {
+      xml {
+        source => "cfind"
+        target => "CFind"
+        xpath => [
+          "/ParticipantObjectIdentification/ParticipantObjectQuery", "cfindParticipantObjectQuery"
+        ]
+        remove_field => [ "qido" ]
+      }
+      if [cfindParticipantObjectQuery] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('CFindParticipantObjectQuery', Base64.decode64(event.get('cfindParticipantObjectQuery')[0]))"
+          remove_field => [ "cfindParticipantObjectQuery" ]
         }
       }
     }
