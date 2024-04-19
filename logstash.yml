@@ -62,7 +62,7 @@ filter {
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='113877'][1]", "device",
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='TASK'][1]", "task",
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='TASKS'][1]", "tasks"
-        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='QIDO'][1]", "qido"
+        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='REST'][1]", "rest"
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='110181'][1]", "cfind"
       ]
     }
@@ -342,20 +342,20 @@ filter {
         }
       }
     }
-    if [qido] {
+    if [rest] {
       xml {
-          source => "qido"
-          target => "QIDO"
+          source => "rest"
+          target => "REST"
           xpath => [
-            "/ParticipantObjectIdentification/ParticipantObjectQuery", "qidoParticipantObjectQuery"
+            "/ParticipantObjectIdentification/ParticipantObjectQuery", "restParticipantObjectQuery"
           ]
-          remove_field => [ "qido" ]
+          remove_field => [ "rest" ]
         }
-        if [qidoParticipantObjectQuery] {
+        if [restParticipantObjectQuery] {
           ruby {
           init => "require 'base64'"
-          code => "event.set('QIDOParticipantObjectQuery', Base64.decode64(event.get('qidoParticipantObjectQuery')[0]))"
-          remove_field => [ "qidoParticipantObjectQuery" ]
+          code => "event.set('RESTParticipantObjectQuery', Base64.decode64(event.get('restParticipantObjectQuery')[0]))"
+          remove_field => [ "restParticipantObjectQuery" ]
         }
       }
     }
@@ -366,7 +366,7 @@ filter {
         xpath => [
           "/ParticipantObjectIdentification/ParticipantObjectQuery", "cfindParticipantObjectQuery"
         ]
-        remove_field => [ "qido" ]
+        remove_field => [ "cfind" ]
       }
       if [cfindParticipantObjectQuery] {
         ruby {
