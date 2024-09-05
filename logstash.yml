@@ -208,6 +208,9 @@ filter {
           "/ParticipantObjectIdentification/@ParticipantObjectDataLifeCycle", "ParticipantObjectDataLifeCycle",
           "/ParticipantObjectIdentification/ParticipantObjectDescription[1]/Accession[1]/@Number", "AccessionNumber",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='StudyDate']/@value", "studyDate",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='StudyDescription']/@value", "studyDescription",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='SeriesDescription']/@value", "seriesDescription",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='Modality']/@value", "modality",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message']/@value", "hl7v2Message",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='HL7v2 Message'][2]/@value", "hl7v2Message2",
           "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='MSH-9']/@value", "msh_9",
@@ -222,6 +225,27 @@ filter {
           init => "require 'base64'"
           code => "event.set('StudyDate', Base64.decode64(event.get('studyDate')[0]))"
           remove_field => [ "studyDate" ]
+        }
+      }
+      if [studyDescription] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('StudyDescription', Base64.decode64(event.get('studyDescription')[0]))"
+          remove_field => [ "studyDescription" ]
+        }
+      }
+      if [seriesDescription] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('SeriesDescription', Base64.decode64(event.get('seriesDescription')[0]))"
+          remove_field => [ "seriesDescription" ]
+        }
+      }
+      if [modality] {
+        ruby {
+          init => "require 'base64'"
+          code => "event.set('Modality', Base64.decode64(event.get('modality')[0]))"
+          remove_field => [ "modality" ]
         }
       }
       if [hl7v2Message] {
