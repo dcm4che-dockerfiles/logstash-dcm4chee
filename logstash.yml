@@ -61,8 +61,8 @@ filter {
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='110180'][1]", "study",
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='113877'][1]", "device",
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='TASK'][1]", "task",
-        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='TASKS'][1]", "tasks"
-        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='REST'][1]", "rest"
+        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='TASKS'][1]", "tasks",
+        "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='REST'][1]", "rest",
         "/AuditMessage/ParticipantObjectIdentification[ParticipantObjectIDTypeCode/@csd-code='110181'][1]", "cfind"
       ]
     }
