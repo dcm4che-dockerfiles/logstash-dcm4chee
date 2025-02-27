@@ -160,14 +160,14 @@ filter {
       if [hl7v2Message] {
         ruby {
           init => "require 'base64'"
-          code => "event.set('HL7v2Message', Base64.decode64(event.get('hl7v2Message')[0]).force_encoding('${HL7_CHARSET}').encode('UTF-8'))"
+          code => "event.set('HL7v2Message', Base64.decode64(event.get('hl7v2Message')[0]).force_encoding(ENV['HL7_CHARSET']).encode('UTF-8'))"
           remove_field => [ "hl7v2Message" ]
         }
       }
       if [hl7v2Message2] {
         ruby {
           init => "require 'base64'"
-          code => "event.set('HL7v2Message2', Base64.decode64(event.get('hl7v2Message2')[0]).force_encoding('${HL7_CHARSET}').encode('UTF-8'))"
+          code => "event.set('HL7v2Message2', Base64.decode64(event.get('hl7v2Message2')[0]).force_encoding(ENV['HL7_CHARSET']).encode('UTF-8'))"
           remove_field => [ "hl7v2Message2" ]
         }
       }
@@ -251,14 +251,14 @@ filter {
       if [hl7v2Message] {
         ruby {
           init => "require 'base64'"
-          code => "event.set('HL7v2Message', Base64.decode64(event.get('hl7v2Message')[0]).force_encoding('${HL7_CHARSET}').encode('UTF-8'))"
+          code => "event.set('HL7v2Message', Base64.decode64(event.get('hl7v2Message')[0]).force_encoding(ENV['HL7_CHARSET']).encode('UTF-8'))"
           remove_field => [ "hl7v2Message" ]
         }
       }
       if [hl7v2Message2] {
         ruby {
           init => "require 'base64'"
-          code => "event.set('HL7v2Message2', Base64.decode64(event.get('hl7v2Message2')[0]).force_encoding('${HL7_CHARSET}').encode('UTF-8'))"
+          code => "event.set('HL7v2Message2', Base64.decode64(event.get('hl7v2Message2')[0]).force_encoding(ENV['HL7_CHARSET']).encode('UTF-8'))"
           remove_field => [ "hl7v2Message2" ]
         }
       }
@@ -371,7 +371,7 @@ filter {
           source => "rest"
           target => "REST"
           xpath => [
-            "/ParticipantObjectIdentification/ParticipantObjectQuery", "restParticipantObjectQuery"
+            "/ParticipantObjectIdentification/ParticipantObjectQuery/text()", "restParticipantObjectQuery"
           ]
           remove_field => [ "rest" ]
         }
@@ -388,7 +388,7 @@ filter {
         source => "cfind"
         target => "CFind"
         xpath => [
-          "/ParticipantObjectIdentification/ParticipantObjectQuery", "cfindParticipantObjectQuery"
+          "/ParticipantObjectIdentification/ParticipantObjectQuery/text()", "cfindParticipantObjectQuery"
         ]
         remove_field => [ "cfind" ]
       }
