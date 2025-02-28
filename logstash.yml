@@ -388,15 +388,15 @@ filter {
         source => "cfind"
         target => "CFind"
         xpath => [
-          "/ParticipantObjectIdentification/ParticipantObjectQuery/text()", "cfindParticipantObjectQuery"
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='CFindQueryReturnKeys']/@value", "cFindQueryReturnKeys",
         ]
         remove_field => [ "cfind" ]
       }
-      if [cfindParticipantObjectQuery] {
+      if [cFindQueryReturnKeys] {
         ruby {
           init => "require 'base64'"
-          code => "event.set('CFindParticipantObjectQuery', Base64.decode64(event.get('cfindParticipantObjectQuery')[0]))"
-          remove_field => [ "cfindParticipantObjectQuery" ]
+          code => "event.set('CFindQueryReturnKeys', Base64.decode64(event.get('cFindQueryReturnKeys')[0]))"
+          remove_field => [ "cFindQueryReturnKeys" ]
         }
       }
     }
