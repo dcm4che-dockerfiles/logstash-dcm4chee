@@ -1,4 +1,4 @@
-FROM logstash:8.15.1
+FROM logstash:8.17.2
 
 RUN /usr/share/logstash/bin/logstash-plugin install --version 5.0.0 logstash-codec-frame && \
     /usr/share/logstash/bin/logstash-plugin install --version 6.4.3 logstash-filter-hashtree
