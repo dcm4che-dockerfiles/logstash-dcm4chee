@@ -388,7 +388,7 @@ filter {
         source => "cfind"
         target => "CFind"
         xpath => [
-          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='CFindQueryReturnKeys']/@value", "cFindQueryReturnKeys",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='Identifier']/@value", "cFindQueryReturnKeys",
         ]
         remove_field => [ "cfind" ]
       }
