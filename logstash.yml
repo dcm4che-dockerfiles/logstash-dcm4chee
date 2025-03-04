@@ -371,15 +371,15 @@ filter {
           source => "rest"
           target => "REST"
           xpath => [
-            "/ParticipantObjectIdentification/ParticipantObjectQuery/text()", "restParticipantObjectQuery"
+            "/ParticipantObjectIdentification/ParticipantObjectQuery/text()", "participantObjectQuery"
           ]
           remove_field => [ "rest" ]
         }
-        if [restParticipantObjectQuery] {
+        if [participantObjectQuery] {
           ruby {
           init => "require 'base64'"
-          code => "event.set('RESTParticipantObjectQuery', Base64.decode64(event.get('restParticipantObjectQuery')[0]))"
-          remove_field => [ "restParticipantObjectQuery" ]
+          code => "event.set('ParticipantObjectQuery', Base64.decode64(event.get('participantObjectQuery')[0]))"
+          remove_field => [ "participantObjectQuery" ]
         }
       }
     }
@@ -388,15 +388,15 @@ filter {
         source => "cfind"
         target => "CFind"
         xpath => [
-          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='Identifier']/@value", "cFindQueryReturnKeys",
+          "/ParticipantObjectIdentification/ParticipantObjectDetail[@type='Identifier']/@value", "participantObjectQuery",
         ]
         remove_field => [ "cfind" ]
       }
-      if [cFindQueryReturnKeys] {
+      if [participantObjectQuery] {
         ruby {
           init => "require 'base64'"
-          code => "event.set('CFindQueryReturnKeys', Base64.decode64(event.get('cFindQueryReturnKeys')[0]))"
-          remove_field => [ "cFindQueryReturnKeys" ]
+          code => "event.set('ParticipantObjectQuery', Base64.decode64(event.get('participantObjectQuery')[0]))"
+          remove_field => [ "participantObjectQuery" ]
         }
       }
     }
